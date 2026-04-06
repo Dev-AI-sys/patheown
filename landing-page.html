@@ -28,6 +28,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-cta{background:var(--accent);color:#fff;font-size:14px;font-weight:700;padding:10px 22px;border-radius:100px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s}
 .nav-cta:hover{background:var(--accent-dk);transform:translateY(-1px);box-shadow:0 6px 20px rgba(108,99,255,.3)}
 
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;border-radius:8px;transition:background .2s}
+.hamburger:hover{background:var(--surface)}
+.hamburger span{display:block;width:22px;height:2.5px;background:var(--text);border-radius:2px;transition:all .28s ease}
+.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+/* MOBILE MENU DRAWER */
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;z-index:199;background:#fff;border-bottom:2px solid var(--border);box-shadow:0 8px 32px rgba(108,99,255,.12);padding:20px 24px 28px;flex-direction:column;gap:4px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:17px;font-weight:600;color:var(--text);text-decoration:none;padding:13px 16px;border-radius:12px;transition:background .18s,color .18s}
+.mobile-menu a:hover{background:var(--surface);color:var(--accent)}
+.mobile-menu .mob-cta{background:var(--accent);color:#fff;text-align:center;margin-top:8px;border-radius:100px;padding:14px 16px;font-weight:700}
+.mobile-menu .mob-cta:hover{background:var(--accent-dk);color:#fff}
+
 /* HERO */
 .hero-section{background:linear-gradient(160deg,#fff 0%,#f7f5ff 55%,#ede9ff 100%);padding:110px 56px 80px;position:relative;overflow:hidden}
 .hero-section::before{content:'';position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(108,99,255,.12) 0%,transparent 65%);pointer-events:none}
@@ -244,7 +260,10 @@ footer p{font-size:14.5px;color:rgba(255,255,255,.3)}
 @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
 @media(max-width:1024px){
-  nav{padding:0 24px}.nav-links{display:none}
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .hamburger{display:flex}
   .hero-section{padding:100px 24px 64px}
   .hero-inner{grid-template-columns:1fr;gap:48px}
   .pain-grid,.features-grid,.steps-grid{grid-template-columns:1fr}
@@ -278,14 +297,25 @@ footer p{font-size:14.5px;color:rgba(255,255,255,.3)}
     <a href="results.html">Results</a>
   </div>
   <a class="nav-cta" href="#demo">Book a Free Demo →</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#how" onclick="closeMobileMenu()">How It Works</a>
+  <a href="industries.html" onclick="closeMobileMenu()">Specialties</a>
+  <a href="pricing-tiers.html" onclick="closeMobileMenu()">Pricing</a>
+  <a href="results.html" onclick="closeMobileMenu()">Results</a>
+  <a href="#demo" class="mob-cta" onclick="closeMobileMenu()">Book a Free Demo →</a>
+</div>
 
 <!-- HERO -->
 <section class="hero-section">
   <div class="hero-inner">
     <div>
       <div class="hero-tag"><span class="tag-dot"></span><span>100% HIPAA-Compliant AI Built Exclusively for Healthcare</span></div>
-      <h1>Your practice is losing revenue<br>to admin overload.<br><em>We fix that.</em></h1>
+      <h1>Your test practice is losing revenue<br>to admin overload.<br><em>We fix that.</em></h1>
       <p class="hero-sub">Patheown builds <b>AI systems purpose-built for healthcare practices</b> automating patient intake, scheduling, clinical notes, follow-ups, and billing so your providers spend their time on patients, not paperwork.</p>
       <div class="hero-ctas">
         <a class="btn-hero" href="#demo">Get My Free Strategy Demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
@@ -338,7 +368,7 @@ footer p{font-size:14.5px;color:rgba(255,255,255,.3)}
 
 <!-- PROOF STRIP -->
 <div class="proof-strip">
-  <div class="ps-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Trusted by 200+ Healthcare Practices</div>
+  <div class="ps-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Trusted by 500+ Healthcare Practices</div>
   <div class="ps-sep"></div>
   <div class="ps-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Average 40% No-Show Reduction in 60 Days</div>
   <div class="ps-sep"></div>
@@ -633,6 +663,21 @@ document.querySelectorAll('.spec-tab').forEach((tab, i, tabs) => {
     const panel = document.getElementById('panel-' + this.dataset.panel);
     if (panel) panel.classList.add('active');
   });
+});
+</script>
+<script>
+function closeMobileMenu(){
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+document.getElementById('hamburger').addEventListener('click',function(){
+  this.classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('nav') && !e.target.closest('.mobile-menu')){
+    closeMobileMenu();
+  }
 });
 </script>
 </body>
