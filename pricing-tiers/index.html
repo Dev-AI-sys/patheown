@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing — Patheown</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #fff;
+        --surface: #f7f6ff;
+        --card: #fff;
+        --border: #e4e2f6;
+        --border-h: #b0a8ff;
+        --accent: #6c63ff;
+        --accent-dk: #5550d4;
+        --accent-lt: #ede9ff;
+        --text: #0f0c2e;
+        --muted: #5a5580;
+        --dim: #9490b8;
+        --green: #15803d;
+        --green-bg: #f0fdf4;
+        --green-bdr: #bbf7d0;
+        --gold: #92400e;
+        --gold-bg: #fffbeb;
+        --gold-bdr: #fde68a;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        overflow-x: hidden;
+        line-height: 1.65;
+        font-size: 16px;
+      }
+      body,
+      a,
+      button,
+      input {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 56px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 1px 20px rgba(108, 99, 255, 0.07);
+      }
+      .nav-logo {
+        font-family: "Instrument Serif", serif;
+        font-size: 26px;
+        text-decoration: none;
+      }
+      .logo-plain {
+        color: var(--text);
+      }
+      .logo-em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .nav-links {
+        display: flex;
+        gap: 34px;
+      }
+      .nav-links a {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.18s;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .nav-cta {
+        background: var(--accent);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px 22px;
+        border-radius: 100px;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--accent-dk);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(108, 99, 255, 0.3);
+      }
+
+      /* HAMBURGER */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 8px;
+        transition: background 0.2s;
+      }
+      .hamburger:hover {
+        background: var(--surface);
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2.5px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: all 0.28s ease;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+      }
+
+      /* MOBILE MENU DRAWER */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        z-index: 199;
+        background: #fff;
+        border-bottom: 2px solid var(--border);
+        box-shadow: 0 8px 32px rgba(108, 99, 255, 0.12);
+        padding: 20px 24px 28px;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--text);
+        text-decoration: none;
+        padding: 13px 16px;
+        border-radius: 12px;
+        transition: background 0.18s, color 0.18s;
+      }
+      .mobile-menu a:hover {
+        background: var(--surface);
+        color: var(--accent);
+      }
+      .mobile-menu .mob-cta {
+        background: var(--accent);
+        color: #fff;
+        text-align: center;
+        margin-top: 8px;
+        border-radius: 100px;
+        padding: 14px 16px;
+        font-weight: 700;
+      }
+      .mobile-menu .mob-cta:hover {
+        background: var(--accent-dk);
+        color: #fff;
+      }
+
+      /* HERO */
+      .hero {
+        background: linear-gradient(155deg, #fff 0%, #f5f3ff 50%, #eae6ff 100%);
+        padding: 130px 56px 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 700px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(108, 99, 255, 0.1) 0%,
+          transparent 68%
+        );
+        pointer-events: none;
+      }
+      .hero-inner {
+        max-width: 680px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: rgba(108, 99, 255, 0.08);
+        border: 1.5px solid rgba(108, 99, 255, 0.22);
+        border-radius: 100px;
+        padding: 8px 20px;
+        margin-bottom: 26px;
+        opacity: 0;
+        animation: fadeup 0.55s 0.05s ease forwards;
+      }
+      .hero-tag span {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .hero h1 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(38px, 5vw, 62px);
+        font-weight: 400;
+        line-height: 1.07;
+        color: var(--text);
+        margin-bottom: 18px;
+        opacity: 0;
+        animation: fadeup 0.6s 0.12s ease forwards;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+      .hero p {
+        font-size: 19px;
+        font-weight: 300;
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 30px;
+        opacity: 0;
+        animation: fadeup 0.6s 0.22s ease forwards;
+      }
+      .hipaa-notice {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: var(--green-bg);
+        border: 1.5px solid var(--green-bdr);
+        border-radius: 100px;
+        padding: 10px 22px;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--green);
+        opacity: 0;
+        animation: fadeup 0.6s 0.3s ease forwards;
+      }
+      .hipaa-notice svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      /* TIERS */
+      .tiers {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 80px 40px 96px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+
+      .tier {
+        background: var(--card);
+        border: 2px solid var(--border);
+        border-radius: 26px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 240px 1fr 180px;
+        transition: box-shadow 0.25s, transform 0.25s;
+      }
+      .tier:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 22px 52px rgba(108, 99, 255, 0.1);
+      }
+      .tier.featured {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px var(--accent),
+          0 14px 44px rgba(108, 99, 255, 0.16);
+      }
+      .tier.featured:hover {
+        box-shadow: 0 0 0 2px var(--accent),
+          0 26px 60px rgba(108, 99, 255, 0.24);
+      }
+      .tier.enterprise {
+        border-color: var(--gold-bdr);
+      }
+      .tier.enterprise:hover {
+        box-shadow: 0 22px 52px rgba(146, 64, 14, 0.09);
+      }
+
+      /* LEFT COLUMN */
+      .tier-l {
+        padding: 38px 30px;
+        border-right: 2px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: var(--surface);
+      }
+      .tier.featured .tier-l {
+        background: linear-gradient(155deg, #f0eeff 0%, #e6e0ff 100%);
+        border-right-color: rgba(108, 99, 255, 0.22);
+      }
+      .tier.enterprise .tier-l {
+        background: var(--gold-bg);
+        border-right-color: var(--gold-bdr);
+      }
+      .tier-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent);
+        color: #fff;
+        border-radius: 100px;
+        padding: 5px 14px;
+        margin-bottom: 14px;
+        width: fit-content;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .tier-num {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--dim);
+        margin-bottom: 6px;
+      }
+      .tier-name {
+        font-family: "Instrument Serif", serif;
+        font-size: 36px;
+        font-weight: 400;
+        color: var(--text);
+        line-height: 1;
+        margin-bottom: 24px;
+      }
+      .tier.featured .tier-name {
+        color: var(--accent-dk);
+      }
+      .tier.enterprise .tier-name {
+        color: var(--gold);
+      }
+      .price-amount {
+        font-size: 44px;
+        font-weight: 800;
+        color: var(--text);
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+      .price-amount sup {
+        font-size: 22px;
+        font-weight: 700;
+        vertical-align: super;
+      }
+      .price-period {
+        font-size: 14.5px;
+        color: var(--dim);
+        font-weight: 500;
+        margin-top: 5px;
+        margin-bottom: 16px;
+      }
+      .price-monthly {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(108, 99, 255, 0.1);
+        border: 1.5px solid rgba(108, 99, 255, 0.22);
+        border-radius: 100px;
+        padding: 8px 18px;
+        font-size: 15.5px;
+        font-weight: 700;
+        color: var(--accent-dk);
+        width: fit-content;
+      }
+      .tier.enterprise .price-monthly {
+        background: rgba(146, 64, 14, 0.07);
+        border-color: var(--gold-bdr);
+        color: var(--gold);
+      }
+      .hipaa-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--green-bg);
+        border: 1.5px solid var(--green-bdr);
+        border-radius: 100px;
+        padding: 6px 14px;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--green);
+        margin-top: 16px;
+        width: fit-content;
+      }
+      .hipaa-tag svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* MIDDLE COLUMN */
+      .tier-m {
+        padding: 38px 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .inc-label {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--dim);
+        margin-bottom: 22px;
+      }
+      .feat-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .feat-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        font-size: 16.5px;
+        color: var(--text);
+        line-height: 1.55;
+      }
+      .feat-item.highlight {
+        font-weight: 700;
+        color: var(--accent-dk);
+      }
+      .tier.enterprise .feat-item.highlight {
+        color: var(--gold);
+      }
+      .feat-check {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(108, 99, 255, 0.1);
+        border: 1.5px solid rgba(108, 99, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .feat-check svg {
+        width: 12px;
+        height: 12px;
+        color: var(--accent);
+      }
+      .tier.enterprise .feat-check {
+        background: rgba(146, 64, 14, 0.08);
+        border-color: var(--gold-bdr);
+      }
+      .tier.enterprise .feat-check svg {
+        color: var(--gold);
+      }
+
+      /* RIGHT COLUMN */
+      .tier-r {
+        padding: 38px 24px;
+        border-left: 2px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        text-align: center;
+      }
+      .tier.featured .tier-r {
+        border-left-color: rgba(108, 99, 255, 0.22);
+      }
+      .tier.enterprise .tier-r {
+        border-left-color: var(--gold-bdr);
+      }
+      .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        width: 100%;
+        padding: 16px 14px;
+        border-radius: 100px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 15.5px;
+        font-weight: 700;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .cta-btn svg {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.2s;
+        flex-shrink: 0;
+      }
+      .cta-btn:hover svg {
+        transform: translateX(4px);
+      }
+      .cta-solid {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(108, 99, 255, 0.26);
+      }
+      .cta-solid:hover {
+        background: var(--accent-dk);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(108, 99, 255, 0.34);
+      }
+      .cta-outline {
+        background: var(--surface);
+        border: 2px solid var(--border-h);
+        color: var(--accent-dk);
+      }
+      .cta-outline:hover {
+        background: var(--accent-lt);
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .cta-gold {
+        background: var(--gold-bg);
+        border: 2px solid var(--gold-bdr);
+        color: var(--gold);
+      }
+      .cta-gold:hover {
+        border-color: var(--gold);
+        transform: translateY(-2px);
+      }
+      .cta-label {
+        font-size: 14.5px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      /* COMPARE */
+      .compare {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 40px 96px;
+      }
+      .compare-title {
+        text-align: center;
+        margin-bottom: 52px;
+      }
+      .compare-title h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(28px, 3.5vw, 42px);
+        font-weight: 400;
+        color: var(--text);
+        margin-bottom: 12px;
+      }
+      .compare-title h2 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+      .compare-title p {
+        font-size: 17.5px;
+        color: var(--muted);
+        max-width: 480px;
+        margin: 0 auto;
+        line-height: 1.75;
+      }
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        font-size: 15.5px;
+      }
+      thead tr th {
+        padding: 18px 22px;
+        font-weight: 700;
+        color: var(--text);
+        background: var(--surface);
+        border-bottom: 2px solid var(--border);
+        text-align: center;
+      }
+      thead tr th:first-child {
+        text-align: left;
+        width: 44%;
+      }
+      thead tr th.feat-col {
+        background: var(--accent-lt);
+        color: var(--accent-dk);
+      }
+      tbody tr td {
+        padding: 15px 22px;
+        color: var(--text);
+        border-top: 1px solid var(--border);
+        text-align: center;
+        vertical-align: middle;
+      }
+      tbody tr td:first-child {
+        text-align: left;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      tbody tr td.feat-col {
+        background: rgba(108, 99, 255, 0.04);
+      }
+      tbody tr:hover {
+        background: var(--surface);
+      }
+      .yes {
+        color: var(--accent);
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .no {
+        color: var(--dim);
+        font-size: 18px;
+      }
+
+      /* FAQ */
+      .faq {
+        background: var(--surface);
+        padding: 88px 56px;
+      }
+      .faq-inner {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .faq-title {
+        text-align: center;
+        margin-bottom: 52px;
+      }
+      .faq-title h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(26px, 3vw, 40px);
+        font-weight: 400;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+      .faq-title h2 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+      .faq-item {
+        background: var(--card);
+        border: 2px solid var(--border);
+        border-radius: 18px;
+        padding: 24px 28px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+      }
+      .faq-item:hover {
+        border-color: var(--border-h);
+      }
+      .faq-item.open {
+        border-color: rgba(108, 99, 255, 0.32);
+        box-shadow: 0 4px 16px rgba(108, 99, 255, 0.07);
+      }
+      .faq-q {
+        font-size: 17.5px;
+        font-weight: 600;
+        color: var(--text);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        user-select: none;
+      }
+      .faq-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 20px;
+        line-height: 1;
+        color: var(--accent);
+        transition: transform 0.25s, background 0.2s;
+      }
+      .faq-item.open .faq-icon {
+        transform: rotate(45deg);
+        background: var(--accent-lt);
+        border-color: rgba(108, 99, 255, 0.32);
+      }
+      .faq-a {
+        font-size: 16.5px;
+        color: var(--muted);
+        line-height: 1.8;
+        margin-top: 16px;
+        display: none;
+      }
+      .faq-item.open .faq-a {
+        display: block;
+      }
+
+      /* BOTTOM */
+      .bottom {
+        background: linear-gradient(130deg, var(--accent) 0%, #4f46e5 100%);
+        padding: 90px 56px;
+        text-align: center;
+      }
+      .bottom h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(28px, 3.5vw, 44px);
+        font-weight: 400;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 14px;
+      }
+      .bottom h2 em {
+        font-style: italic;
+        opacity: 0.82;
+      }
+      .bottom p {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.8;
+        max-width: 540px;
+        margin: 0 auto 38px;
+      }
+      .btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .btn-white {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        color: var(--accent);
+        font-size: 16.5px;
+        font-weight: 700;
+        padding: 17px 36px;
+        border-radius: 100px;
+        text-decoration: none;
+        box-shadow: 0 4px 22px rgba(0, 0, 0, 0.15);
+        transition: all 0.2s;
+      }
+      .btn-white:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+      }
+      .btn-white svg {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.2s;
+      }
+      .btn-white:hover svg {
+        transform: translateX(4px);
+      }
+      .btn-ghost-w {
+        font-size: 16px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.78);
+        text-decoration: none;
+        transition: color 0.18s;
+      }
+      .btn-ghost-w:hover {
+        color: #fff;
+      }
+
+      footer {
+        background: var(--text);
+        padding: 40px 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .f-logo {
+        font-family: "Instrument Serif", serif;
+        font-size: 26px;
+        text-decoration: none;
+      }
+      .f-logo .logo-plain {
+        color: #fff;
+      }
+      .f-logo .logo-em {
+        color: #a89fff;
+        font-style: italic;
+      }
+      .f-links {
+        display: flex;
+        gap: 32px;
+      }
+      .f-links a {
+        font-size: 15.5px;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        transition: color 0.18s;
+      }
+      .f-links a:hover {
+        color: #fff;
+      }
+      footer p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.32);
+      }
+
+      @keyframes fadeup {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 1040px) {
+        nav,
+        .hero,
+        .faq,
+        .bottom {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-cta {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .hero {
+          padding-top: 108px;
+        }
+        .tiers,
+        .compare {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .tier {
+          grid-template-columns: 1fr;
+        }
+        .tier-l,
+        .tier-m {
+          border-right: none;
+          border-bottom: 2px solid var(--border);
+        }
+        .tier-r {
+          border-left: none;
+          border-top: 2px solid var(--border);
+        }
+        table {
+          font-size: 14px;
+        }
+        thead tr th,
+        tbody tr td {
+          padding: 12px 14px;
+        }
+        footer {
+          padding: 30px 24px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="nav-logo" href="/"
+        ><span class="logo-plain">Path</span
+        ><span class="logo-em">eown</span></a
+      >
+      <div class="nav-links">
+        <a href="/#how">How It Works</a>
+        <a href="/industries">Specialties</a>
+        <a href="/pricing-tiers">Pricing</a>
+        <a href="/results">Results</a>
+      </div>
+      <a class="nav-cta" href="/#demo">Book a Free Demo →</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/#how" onclick="closeMobileMenu()">How It Works</a>
+      <a href="/industries" onclick="closeMobileMenu()">Specialties</a>
+      <a href="/pricing-tiers" onclick="closeMobileMenu()">Pricing</a>
+      <a href="/results" onclick="closeMobileMenu()">Results</a>
+      <a href="/#demo" class="mob-cta" onclick="closeMobileMenu()"
+        >Book a Free Demo →</a
+      >
+    </div>
+
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-tag"><span>Simple, Transparent Pricing</span></div>
+        <h1>
+          The right package for where<br />your practice is <em>right now.</em>
+        </h1>
+        <p>
+          Three tiers built to meet your practice exactly where it is today and
+          scale as you grow. No bloat, no surprises, no long-term lock-in.
+        </p>
+        <div class="hipaa-notice">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg
+          >Every tier includes full HIPAA compliance and BAA signing
+        </div>
+      </div>
+    </div>
+
+    <div class="tiers">
+      <!-- STARTUP -->
+      <div class="tier">
+        <div class="tier-l">
+          <div class="tier-num">Tier 00</div>
+          <div class="tier-name">Startup</div>
+          <div class="price-amount"><sup>$</sup>5,000</div>
+          <div class="price-period">one-time setup fee</div>
+          <div class="price-monthly">$995 per month</div>
+          <div class="hipaa-tag">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" /></svg
+            >HIPAA Compliant
+          </div>
+        </div>
+        <div class="tier-m">
+          <div class="inc-label">What Is Included</div>
+          <ul class="feat-list">
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >HIPAA-Compliant AI-Ready Automation CRM built to scale with your
+              practice
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Paperwork automation workflows that eliminate manual admin across
+              your team
+            </li>
+          </ul>
+        </div>
+        <div class="tier-r">
+          <a class="cta-btn cta-outline" href="/#demo"
+            >Get Started
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" /></svg
+          ></a>
+          <div class="cta-label">
+            New practices taking their first step into AI automation.
+          </div>
+        </div>
+      </div>
+
+      <!-- GROWTH -->
+      <div class="tier">
+        <div class="tier-l">
+          <div class="tier-num">Tier 01</div>
+          <div class="tier-name">Growth</div>
+          <div class="price-amount"><sup>$</sup>8,500</div>
+          <div class="price-period">per location</div>
+          <div class="price-monthly">$2,500 per month</div>
+          <div class="hipaa-tag">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" /></svg
+            >HIPAA Compliant
+          </div>
+        </div>
+        <div class="tier-m">
+          <div class="inc-label">What Is Included</div>
+          <ul class="feat-list">
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >AI Patient Chatbot capturing new patients 24 hours a day, 7 days
+              a week
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Custom Healthcare CRM with patient pipeline and follow-up
+              tracking
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Automated appointment reminders and confirmation sequences
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Digital intake form automation and paperwork collection
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Full EHR integration, onboarding, and staff training included
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Google Ads management included — minimum $3,000 monthly ad budget
+              required
+            </li>
+          </ul>
+        </div>
+        <div class="tier-r">
+          <a class="cta-btn cta-outline" href="/#demo"
+            >Start Growth
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" /></svg
+          ></a>
+          <div class="cta-label">
+            Single-location practices ready to start automating.
+          </div>
+        </div>
+      </div>
+
+      <!-- SCALE -->
+      <div class="tier featured">
+        <div class="tier-l">
+          <div class="tier-badge">&#9889; Most Popular</div>
+          <div class="tier-num">Tier 02</div>
+          <div class="tier-name">Scale</div>
+          <div class="price-amount"><sup>$</sup>12,000</div>
+          <div class="price-period">one-time setup fee</div>
+          <div class="price-monthly">$5,000 per month</div>
+          <div class="hipaa-tag">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" /></svg
+            >HIPAA Compliant
+          </div>
+        </div>
+        <div class="tier-m">
+          <div class="inc-label">What Is Included</div>
+          <ul class="feat-list">
+            <li class="feat-item highlight">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Everything in Growth, plus:
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >AI Medical Notes assisting your team complete daily clinical
+              notes
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Full patient recall and re-engagement automation campaigns
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Insurance verification and pre-authorization workflow automation
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Multi-provider scheduling optimization and waitlist management
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Bi-weekly strategy and performance optimization calls
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Google PPC ads with targeted data engineering to generate a
+              constant stream of qualified patient leads
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Google Ads management included — minimum $3,000 monthly ad budget
+              required
+            </li>
+          </ul>
+        </div>
+        <div class="tier-r">
+          <a class="cta-btn cta-solid" href="/#demo"
+            >Start Scaling
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" /></svg
+          ></a>
+          <div class="cta-label">
+            Growing practices and multi-provider clinics ready to scale.
+          </div>
+        </div>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="tier enterprise">
+        <div class="tier-l">
+          <div class="tier-num">Tier 03</div>
+          <div class="tier-name">Enterprise</div>
+          <div
+            class="price-amount"
+            style="font-size: 32px; letter-spacing: -0.01em"
+          >
+            Custom Pricing
+          </div>
+          <div class="hipaa-tag">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" /></svg
+            >HIPAA Compliant
+          </div>
+        </div>
+        <div class="tier-m">
+          <div class="inc-label">What Is Included</div>
+          <ul class="feat-list">
+            <li class="feat-item highlight">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Everything in Scale, plus:
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Full AI Healthcare Operating System deployed across all
+              departments
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Custom AI model trained on your specific clinical workflows
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Multi-location deployment with unified reporting dashboard
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Dedicated healthcare AI strategist and account manager
+            </li>
+            <li class="feat-item">
+              <span class="feat-check"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" /></svg></span
+              >Priority support, weekly reviews, and quarterly compliance
+              auditing
+            </li>
+          </ul>
+        </div>
+        <div class="tier-r">
+          <a class="cta-btn cta-gold" href="/#demo"
+            >Let's Talk
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" /></svg
+          ></a>
+          <div class="cta-label">Multi-location groups and health systems.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARE -->
+    <div class="compare">
+      <div class="compare-title">
+        <h2>Compare every tier <em>side by side.</em></h2>
+        <p>
+          See exactly what is included at each level so you can choose with
+          confidence.
+        </p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Startup</th>
+            <th class="feat-col">Growth</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HIPAA Compliance and BAA Signing</td>
+            <td><span class="yes">✔</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>24/7 AI Patient Chatbot</td>
+            <td><span class="yes">✔</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>Custom Healthcare CRM</td>
+            <td>Basic</td>
+            <td class="feat-col">Advanced</td>
+            <td>Enterprise</td>
+          </tr>
+          <tr>
+            <td>Appointment Automation</td>
+            <td><span class="yes">✔</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>Digital Intake and Paperwork</td>
+            <td><span class="yes">✔</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>EHR Integration</td>
+            <td><span class="yes">✔</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>Fax API Integration</td>
+            <td><span class="no">✕</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>AI Medical Notes</td>
+            <td><span class="no">✕</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>Patient Recall Campaigns</td>
+            <td><span class="no">✕</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>Insurance Auth Workflows</td>
+            <td><span class="no">✕</span></td>
+            <td class="feat-col"><span class="yes">✔</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>Multi-Location Deployment</td>
+            <td><span class="no">✕</span></td>
+            <td class="feat-col"><span class="no">✕</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>Custom AI Model Training</td>
+            <td><span class="no">✕</span></td>
+            <td class="feat-col"><span class="no">✕</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+          <tr>
+            <td>Dedicated Account Manager</td>
+            <td><span class="no">✕</span></td>
+            <td class="feat-col"><span class="no">✕</span></td>
+            <td><span class="yes">✔</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+      <div class="faq-inner">
+        <div class="faq-title">
+          <h2>Frequently asked <em>questions.</em></h2>
+        </div>
+        <div class="faq-item open">
+          <div class="faq-q">
+            Is Patheown truly HIPAA compliant?<span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Yes, completely. We sign a Business Associate Agreement before any
+            data is discussed or any system is built. Every tool uses end-to-end
+            encryption, PHI-safe data handling, and operates fully within HIPAA
+            guidelines from day one.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            How long does it take to go live?<span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Most practices are fully live in 7 to 14 days. We handle the entire
+            build, EHR integration, and staff training. Your team stays focused
+            on patients throughout the entire process.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            Does it integrate with my existing EHR and scheduling software?<span
+              class="faq-icon"
+              >+</span
+            >
+          </div>
+          <div class="faq-a">
+            Yes. Patheown integrates with most major EHR and practice management
+            systems. There is no rip-and-replace required. We work with what you
+            already have in place.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            What if I am not sure which tier fits my practice?<span
+              class="faq-icon"
+              >+</span
+            >
+          </div>
+          <div class="faq-a">
+            Book a free strategy call. We will audit your workflows, identify
+            your biggest revenue leaks, and recommend the exact tier for your
+            practice with no pressure and no commitment required.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            Is there a long-term contract?<span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            No. There are no long-term contracts. Our clients stay because the
+            results speak for themselves. Month-to-month billing after the
+            initial setup is complete.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <h2>Not sure where to start? <em>We will tell you.</em></h2>
+      <p>
+        Book a free 30-minute strategy call. We will map out your biggest
+        opportunities and recommend exactly which tier makes sense for your
+        practice right now.
+      </p>
+      <div class="btns">
+        <a class="btn-white" href="/#demo"
+          >Book My Free Strategy Call
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 8h10M9 4l4 4-4 4" /></svg
+        ></a>
+        <a class="btn-ghost-w" href="/industries">View Specialties</a>
+      </div>
+    </div>
+
+    <footer>
+      <div class="f-logo">
+        <span class="logo-plain">Path</span><span class="logo-em">eown</span>
+      </div>
+      <div class="f-links">
+        <a href="/industries">Specialties</a>
+        <a href="/pricing-tiers">Pricing</a>
+        <a href="/results">Results</a>
+      </div>
+      <p>© 2025 Patheown · HIPAA Compliant · All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        item
+          .querySelector(".faq-q")
+          .addEventListener("click", () => item.classList.toggle("open"));
+      });
+    </script>
+    <script>
+      function closeMobileMenu() {
+        document.getElementById("mobile-menu").classList.remove("open");
+        document.getElementById("hamburger").classList.remove("open");
+      }
+      document
+        .getElementById("hamburger")
+        .addEventListener("click", function () {
+          this.classList.toggle("open");
+          document.getElementById("mobile-menu").classList.toggle("open");
+        });
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest("nav") && !e.target.closest(".mobile-menu")) {
+          closeMobileMenu();
+        }
+      });
+    </script>
+  </body>
+</html>

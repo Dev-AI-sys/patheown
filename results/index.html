@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results — Patheown</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #fff;
+        --surface: #f7f6ff;
+        --card: #fff;
+        --border: #e4e2f6;
+        --border-h: #b0a8ff;
+        --accent: #6c63ff;
+        --accent-dk: #5550d4;
+        --accent-lt: #ede9ff;
+        --text: #0f0c2e;
+        --muted: #5a5580;
+        --dim: #9490b8;
+        --green: #15803d;
+        --green-bg: #f0fdf4;
+        --green-bdr: #bbf7d0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        overflow-x: hidden;
+        line-height: 1.65;
+        font-size: 16px;
+      }
+      body,
+      a,
+      button,
+      input {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 56px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 1px 20px rgba(108, 99, 255, 0.07);
+      }
+      .nav-logo {
+        font-family: "Instrument Serif", serif;
+        font-size: 26px;
+        text-decoration: none;
+      }
+      .logo-plain {
+        color: var(--text);
+      }
+      .logo-em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .nav-links {
+        display: flex;
+        gap: 34px;
+      }
+      .nav-links a {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.18s;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .nav-cta {
+        background: var(--accent);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px 22px;
+        border-radius: 100px;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--accent-dk);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(108, 99, 255, 0.3);
+      }
+
+      /* HAMBURGER */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 8px;
+        transition: background 0.2s;
+      }
+      .hamburger:hover {
+        background: var(--surface);
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2.5px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: all 0.28s ease;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+      }
+
+      /* MOBILE MENU DRAWER */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        z-index: 199;
+        background: #fff;
+        border-bottom: 2px solid var(--border);
+        box-shadow: 0 8px 32px rgba(108, 99, 255, 0.12);
+        padding: 20px 24px 28px;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--text);
+        text-decoration: none;
+        padding: 13px 16px;
+        border-radius: 12px;
+        transition: background 0.18s, color 0.18s;
+      }
+      .mobile-menu a:hover {
+        background: var(--surface);
+        color: var(--accent);
+      }
+      .mobile-menu .mob-cta {
+        background: var(--accent);
+        color: #fff;
+        text-align: center;
+        margin-top: 8px;
+        border-radius: 100px;
+        padding: 14px 16px;
+        font-weight: 700;
+      }
+      .mobile-menu .mob-cta:hover {
+        background: var(--accent-dk);
+        color: #fff;
+      }
+
+      /* HERO */
+      .hero {
+        background: linear-gradient(155deg, #fff 0%, #f5f3ff 50%, #eae6ff 100%);
+        padding: 130px 56px 80px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 560px;
+        height: 560px;
+        background: radial-gradient(
+          circle,
+          rgba(108, 99, 255, 0.11) 0%,
+          transparent 68%
+        );
+        pointer-events: none;
+      }
+      .hero-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 64px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+      .badges-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: rgba(108, 99, 255, 0.08);
+        border: 1.5px solid rgba(108, 99, 255, 0.22);
+        border-radius: 100px;
+        padding: 8px 20px;
+        margin-bottom: 24px;
+        opacity: 0;
+        animation: fadeup 0.55s 0.05s ease forwards;
+      }
+      .hero-tag span {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .hero h1 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(38px, 5vw, 62px);
+        font-weight: 400;
+        line-height: 1.07;
+        color: var(--text);
+        margin-bottom: 18px;
+        opacity: 0;
+        animation: fadeup 0.6s 0.12s ease forwards;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+      .hero p {
+        font-size: 19px;
+        font-weight: 300;
+        color: var(--muted);
+        line-height: 1.8;
+        max-width: 520px;
+        opacity: 0;
+        animation: fadeup 0.6s 0.22s ease forwards;
+      }
+      .g-badge {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: var(--card);
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 22px 28px;
+        box-shadow: 0 4px 22px rgba(108, 99, 255, 0.09);
+        white-space: nowrap;
+        opacity: 0;
+        animation: fadeup 0.7s 0.22s ease forwards;
+      }
+      .g-icon {
+        font-size: 24px;
+        font-weight: 900;
+        font-style: italic;
+        background: linear-gradient(135deg, #4285f4, #34a853, #fbbc04, #ea4335);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .g-score {
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--text);
+        line-height: 1;
+      }
+      .g-stars {
+        color: #f59e0b;
+        font-size: 20px;
+        letter-spacing: 2px;
+      }
+      .g-count {
+        font-size: 14.5px;
+        color: var(--muted);
+        margin-top: 4px;
+        font-weight: 500;
+      }
+      .tp-badge {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: var(--card);
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 22px 28px;
+        box-shadow: 0 4px 22px rgba(108, 99, 255, 0.09);
+        white-space: nowrap;
+        opacity: 0;
+        animation: fadeup 0.7s 0.28s ease forwards;
+      }
+      .tp-logo {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .tp-star {
+        font-size: 20px;
+      }
+      .tp-wordmark {
+        font-size: 15px;
+        font-weight: 800;
+        color: #00b67a;
+        letter-spacing: -0.01em;
+      }
+      .tp-score {
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--text);
+        line-height: 1;
+      }
+      .tp-stars {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        margin-top: 4px;
+      }
+      .tp-star-box {
+        width: 22px;
+        height: 22px;
+        background: #00b67a;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+      }
+      .tp-count {
+        font-size: 14.5px;
+        color: var(--muted);
+        margin-top: 5px;
+        font-weight: 500;
+      }
+
+      /* STATS STRIP */
+      .stats-strip {
+        background: var(--accent);
+        padding: 68px 56px;
+      }
+      .stats-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .stat {
+        text-align: center;
+        padding: 32px 22px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 20px;
+        transition: background 0.2s, transform 0.22s;
+      }
+      .stat:hover {
+        background: rgba(255, 255, 255, 0.17);
+        transform: translateY(-3px);
+      }
+      .stat-num {
+        font-family: "Instrument Serif", serif;
+        font-size: 54px;
+        font-weight: 400;
+        color: #fff;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      .stat-num em {
+        font-style: italic;
+      }
+      .stat-label {
+        font-size: 15.5px;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.55;
+        font-weight: 500;
+      }
+
+      /* CASE STUDIES */
+      .cases {
+        padding: 96px 56px;
+        background: var(--bg);
+      }
+      .wrap {
+        max-width: 1160px;
+        margin: 0 auto;
+      }
+      .sl {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .sl-bar {
+        width: 36px;
+        height: 2.5px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+      .sl-txt {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .section-h {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(30px, 4vw, 50px);
+        font-weight: 400;
+        line-height: 1.1;
+        color: var(--text);
+        margin-bottom: 12px;
+      }
+      .section-h em {
+        font-style: italic;
+        color: var(--accent);
+      }
+      .section-p {
+        font-size: 18px;
+        color: var(--muted);
+        line-height: 1.8;
+        max-width: 580px;
+        margin-bottom: 56px;
+      }
+      .cases-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .case-card {
+        background: var(--card);
+        border: 2px solid var(--border);
+        border-radius: 22px;
+        overflow: hidden;
+        transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      }
+      .case-card:hover {
+        border-color: var(--border-h);
+        box-shadow: 0 18px 52px rgba(108, 99, 255, 0.11);
+        transform: translateY(-4px);
+      }
+      .case-top {
+        background: var(--surface);
+        padding: 28px 32px;
+        border-bottom: 2px solid var(--border);
+      }
+      .case-spec {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--accent-lt);
+        border: 1.5px solid rgba(108, 99, 255, 0.26);
+        border-radius: 100px;
+        padding: 6px 16px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent-dk);
+        margin-bottom: 14px;
+      }
+      .case-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--text);
+        line-height: 1.3;
+        margin-bottom: 6px;
+      }
+      .case-loc {
+        font-size: 14.5px;
+        color: var(--dim);
+        font-weight: 500;
+      }
+      .case-body {
+        padding: 28px 32px;
+      }
+      .case-lbl {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--dim);
+        margin-bottom: 11px;
+      }
+      .case-txt {
+        font-size: 16.5px;
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 26px;
+      }
+      .case-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .cs {
+        background: var(--surface);
+        border: 2px solid var(--border);
+        border-radius: 16px;
+        padding: 18px 14px;
+        text-align: center;
+        transition: border-color 0.22s;
+      }
+      .cs:hover {
+        border-color: var(--border-h);
+      }
+      .cs-num {
+        font-family: "Instrument Serif", serif;
+        font-size: 28px;
+        font-weight: 400;
+        color: var(--accent);
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+      .cs-lbl {
+        font-size: 13.5px;
+        color: var(--muted);
+        line-height: 1.4;
+        font-weight: 500;
+      }
+
+      /* TESTIMONIALS */
+      .testimonials {
+        background: var(--surface);
+        padding: 96px 56px;
+      }
+      .t-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+      .t-card {
+        background: var(--card);
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 30px;
+        transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      }
+      .t-card:hover {
+        border-color: var(--border-h);
+        box-shadow: 0 14px 40px rgba(108, 99, 255, 0.1);
+        transform: translateY(-3px);
+      }
+      .t-stars {
+        color: #f59e0b;
+        font-size: 18px;
+        letter-spacing: 2px;
+        margin-bottom: 16px;
+      }
+      .t-quote {
+        font-size: 16.5px;
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 24px;
+        font-style: italic;
+      }
+      .t-author {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .t-av {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        font-weight: 700;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .t-name {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .t-role {
+        font-size: 14px;
+        color: var(--dim);
+        margin-top: 3px;
+      }
+
+      /* HOW IT WORKS */
+      .how {
+        padding: 96px 56px;
+        background: var(--bg);
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-top: 52px;
+        position: relative;
+      }
+      .steps::before {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: calc(12.5% + 18px);
+        right: calc(12.5% + 18px);
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--border-h),
+          rgba(108, 99, 255, 0.18),
+          var(--border-h)
+        );
+      }
+      .step {
+        text-align: center;
+        padding: 0 14px;
+      }
+      .step-nw {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: center;
+      }
+      .step-n {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: var(--card);
+        border: 2.5px solid var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--accent);
+        box-shadow: 0 4px 20px rgba(108, 99, 255, 0.18);
+      }
+      .step-title {
+        font-size: 17.5px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+      .step-desc {
+        font-size: 16px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      /* BOTTOM CTA */
+      .bottom {
+        background: linear-gradient(130deg, var(--accent) 0%, #4f46e5 100%);
+        padding: 90px 56px;
+        text-align: center;
+      }
+      .bottom h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(28px, 3.5vw, 46px);
+        font-weight: 400;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 14px;
+      }
+      .bottom h2 em {
+        font-style: italic;
+        opacity: 0.82;
+      }
+      .bottom p {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.8;
+        max-width: 540px;
+        margin: 0 auto 38px;
+      }
+      .btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+      .btn-white {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        color: var(--accent);
+        font-size: 16.5px;
+        font-weight: 700;
+        padding: 17px 36px;
+        border-radius: 100px;
+        text-decoration: none;
+        box-shadow: 0 4px 22px rgba(0, 0, 0, 0.15);
+        transition: all 0.2s;
+      }
+      .btn-white:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+      }
+      .btn-white svg {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.2s;
+      }
+      .btn-white:hover svg {
+        transform: translateX(4px);
+      }
+      .btn-ghost-w {
+        font-size: 16px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.78);
+        text-decoration: none;
+        transition: color 0.18s;
+      }
+      .btn-ghost-w:hover {
+        color: #fff;
+      }
+      .trust-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        flex-wrap: wrap;
+      }
+      .tr-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 15px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .tr-item svg {
+        width: 16px;
+        height: 16px;
+        opacity: 0.9;
+      }
+
+      footer {
+        background: var(--text);
+        padding: 40px 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .f-logo {
+        font-family: "Instrument Serif", serif;
+        font-size: 26px;
+        text-decoration: none;
+      }
+      .f-logo .logo-plain {
+        color: #fff;
+      }
+      .f-logo .logo-em {
+        color: #a89fff;
+        font-style: italic;
+      }
+      .f-links {
+        display: flex;
+        gap: 32px;
+      }
+      .f-links a {
+        font-size: 15.5px;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        transition: color 0.18s;
+      }
+      .f-links a:hover {
+        color: #fff;
+      }
+      footer p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.32);
+      }
+
+      @keyframes fadeup {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 1040px) {
+        nav,
+        .hero,
+        .stats-strip,
+        .cases,
+        .testimonials,
+        .how,
+        .bottom {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-cta {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .hero {
+          padding-top: 108px;
+        }
+        .hero-inner {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .badges-stack {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+        .stats-inner {
+          grid-template-columns: 1fr 1fr;
+        }
+        .cases-grid,
+        .t-grid {
+          grid-template-columns: 1fr;
+        }
+        .steps {
+          grid-template-columns: 1fr 1fr;
+          gap: 36px;
+        }
+        .steps::before {
+          display: none;
+        }
+        footer {
+          padding: 30px 24px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      @media (max-width: 600px) {
+        .stats-inner {
+          grid-template-columns: 1fr 1fr;
+        }
+        .case-stats {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="nav-logo" href="/"
+        ><span class="logo-plain">Path</span
+        ><span class="logo-em">eown</span></a
+      >
+      <div class="nav-links">
+        <a href="/#how">How It Works</a>
+        <a href="/industries">Specialties</a>
+        <a href="/pricing-tiers">Pricing</a>
+        <a href="/results">Results</a>
+      </div>
+      <a class="nav-cta" href="/#demo">Book a Free Demo →</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/#how" onclick="closeMobileMenu()">How It Works</a>
+      <a href="/industries" onclick="closeMobileMenu()">Specialties</a>
+      <a href="/pricing-tiers" onclick="closeMobileMenu()">Pricing</a>
+      <a href="/results" onclick="closeMobileMenu()">Results</a>
+      <a href="/#demo" class="mob-cta" onclick="closeMobileMenu()"
+        >Book a Free Demo →</a
+      >
+    </div>
+
+    <div class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag"><span>Practice Results</span></div>
+          <h1>Real practices.<br /><em>Measurable outcomes.</em></h1>
+          <p>
+            Not vanity metrics. Real numbers from real healthcare practices that
+            replaced admin chaos with AI automation and permanently changed how
+            they operate.
+          </p>
+        </div>
+        <div class="badges-stack">
+          <div class="g-badge">
+            <span class="g-icon">G</span>
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px">
+                <span class="g-score">4.9</span
+                ><span class="g-stars">★★★★★</span>
+              </div>
+              <div class="g-count">Based on 140+ Google Reviews</div>
+            </div>
+          </div>
+          <div class="tp-badge">
+            <div>
+              <div class="tp-logo">
+                <span class="tp-star">★</span>
+                <span class="tp-wordmark">Trustpilot</span>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                  margin-top: 6px;
+                "
+              >
+                <span class="tp-score">4.8</span>
+                <div class="tp-stars">
+                  <span class="tp-star-box">★</span
+                  ><span class="tp-star-box">★</span
+                  ><span class="tp-star-box">★</span
+                  ><span class="tp-star-box">★</span
+                  ><span class="tp-star-box">★</span>
+                </div>
+              </div>
+              <div class="tp-count">Based on 90+ Trustpilot Reviews</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-strip">
+      <div class="stats-inner">
+        <div class="stat">
+          <div class="stat-num"><em>40%</em></div>
+          <div class="stat-label">
+            Average reduction in patient no-show rates within 60 days
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><em>2,000+</em></div>
+          <div class="stat-label">
+            Admin hours reclaimed per practice every single year
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><em>98%</em></div>
+          <div class="stat-label">
+            New patient inquiry capture rate around the clock
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><em>3x</em></div>
+          <div class="stat-label">
+            Faster patient response time vs the industry average
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="cases">
+      <div class="wrap">
+        <div class="sl">
+          <span class="sl-bar"></span><span class="sl-txt">Case Studies</span>
+        </div>
+        <h2 class="section-h">
+          Four practices that stopped losing revenue<br />and
+          <em>started winning.</em>
+        </h2>
+        <p class="section-p">
+          Real outcomes from Patheown-powered practices across four of our core
+          healthcare specialties.
+        </p>
+        <div class="cases-grid">
+          <div class="case-card">
+            <div class="case-top">
+              <div class="case-spec">🦷 Dental Practice</div>
+              <div class="case-title">
+                Multi-Location Dental Group Cuts No-Shows by 38%
+              </div>
+              <div class="case-loc">
+                Atlanta, GA &nbsp;·&nbsp; 3 Locations &nbsp;·&nbsp; 12 Providers
+              </div>
+            </div>
+            <div class="case-body">
+              <div class="case-lbl">The Challenge</div>
+              <p class="case-txt">
+                With 3 locations and over 300 appointments weekly, the front
+                desk team was overwhelmed. No-shows were costing $18,000 per
+                month. New patient calls after 5pm went to voicemail and were
+                never returned.
+              </p>
+              <div class="case-stats">
+                <div class="cs">
+                  <div class="cs-num">38%</div>
+                  <div class="cs-lbl">No-show reduction</div>
+                </div>
+                <div class="cs">
+                  <div class="cs-num">$22K</div>
+                  <div class="cs-lbl">Revenue recovered monthly</div>
+                </div>
+                <div class="cs">
+                  <div class="cs-num">15 hrs</div>
+                  <div class="cs-lbl">Staff time saved weekly</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="case-top">
+              <div class="case-spec">🧠 Behavioral Health</div>
+              <div class="case-title">
+                Therapy Practice Eliminates Admin Backlog Completely
+              </div>
+              <div class="case-loc">
+                Chicago, IL &nbsp;·&nbsp; Group Practice &nbsp;·&nbsp; 22
+                Therapists
+              </div>
+            </div>
+            <div class="case-body">
+              <div class="case-lbl">The Challenge</div>
+              <p class="case-txt">
+                Therapists were spending 35% of their time on intake paperwork
+                and insurance follow-ups. The waitlist was 8 weeks long and
+                growing because of operational inefficiency, not a shortage of
+                providers.
+              </p>
+              <div class="case-stats">
+                <div class="cs">
+                  <div class="cs-num">35%</div>
+                  <div class="cs-lbl">More patient time returned</div>
+                </div>
+                <div class="cs">
+                  <div class="cs-num">8 to 3 wk</div>
+                  <div class="cs-lbl">Waitlist reduction</div>
+                </div>
+                <div class="cs">
+                  <div class="cs-num">100%</div>
+                  <div class="cs-lbl">Digital intake completion</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="case-top">
+              <div class="case-spec">✨ Med Spa</div>
+              <div class="case-title">
+                Aesthetic Clinic Books $80K Per Month on Autopilot
+              </div>
+              <div class="case-loc">
+                Miami, FL &nbsp;·&nbsp; Single Location &nbsp;·&nbsp; High
+                Volume
+              </div>
+            </div>
+            <div class="case-body">
+              <div class="case-lbl">The Challenge</div>
+              <p class="case-txt">
+                The med spa had strong social traffic but weak conversion. Most
+                inquiries came after hours via DM and were never followed up.
+                High-value consultations were going to competitors who responded
+                faster.
+              </p>
+              <div class="case-stats">
+                <div class="cs">
+                  <div class="cs-num">460%</div>
+                  <div class="cs-lbl">More consultation bookings</div>
+                </div>
+                <div class="cs">
+                  <div class="cs-num">$80K</div>
+                  <div class="cs-lbl">Revenue automated monthly</div>
+                </div>
+                <div class="cs">
+                  <div class="cs-num">60 sec</div>
+                  <div class="cs-lbl">Average response time</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="case-top">
+              <div class="case-spec">🏠 Home Health</div>
+              <div class="case-title">
+                Home Health Agency Scales Without Adding Coordinators
+              </div>
+              <div class="case-loc">
+                Houston, TX &nbsp;·&nbsp; 180 Active Patients
+              </div>
+            </div>
+            <div class="case-body">
+              <div class="case-lbl">The Challenge</div>
+              <p class="case-txt">
+                The agency was losing referrals because intake took 2 to 3 days.
+                Caregiver scheduling was done manually. Compliance documentation
+                was a monthly crisis that consumed the entire admin team.
+              </p>
+              <div class="case-stats">
+                <div class="cs">
+                  <div class="cs-num">2d to 4hr</div>
+                  <div class="cs-lbl">Intake turnaround</div>
+                </div>
+                <div class="cs">
+                  <div class="cs-num">40%</div>
+                  <div class="cs-lbl">More referrals accepted</div>
+                </div>
+                <div class="cs">
+                  <div class="cs-num">Zero</div>
+                  <div class="cs-lbl">Compliance violations</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="wrap">
+        <div class="sl">
+          <span class="sl-bar"></span
+          ><span class="sl-txt">Provider Testimonials</span>
+        </div>
+        <h2 class="section-h" style="margin-bottom: 12px">
+          What healthcare providers say<br />about <em>Patheown.</em>
+        </h2>
+        <p class="section-p">
+          From dentists to therapists to agency directors. Real words from real
+          people.
+        </p>
+        <div class="t-grid">
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">
+              "Our no-show rate dropped 38% in 60 days. The AI handles
+              everything after hours and our front desk finally has breathing
+              room. Worth every single penny."
+            </p>
+            <div class="t-author">
+              <div
+                class="t-av"
+                style="background: linear-gradient(135deg, #6c63ff, #9d97ff)"
+              >
+                RC
+              </div>
+              <div>
+                <div class="t-name">Dr. Rachel Chen</div>
+                <div class="t-role">Multi-Location Dental Group</div>
+              </div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">
+              "HIPAA compliance was my biggest concern. Patheown had the BAA
+              ready before we discussed systems. My therapists now spend zero
+              time on admin. Just clinical work."
+            </p>
+            <div class="t-author">
+              <div
+                class="t-av"
+                style="background: linear-gradient(135deg, #f59e0b, #fb923c)"
+              >
+                MK
+              </div>
+              <div>
+                <div class="t-name">Michelle Kwan, LCSW</div>
+                <div class="t-role">Behavioral Health Practice Director</div>
+              </div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">
+              "We were losing 25% of after-hours inquiries. Now AI responds in
+              60 seconds, books the consultation, and sends intake. Revenue is
+              up $30K per month."
+            </p>
+            <div class="t-author">
+              <div
+                class="t-av"
+                style="background: linear-gradient(135deg, #22c55e, #16a34a)"
+              >
+                JS
+              </div>
+              <div>
+                <div class="t-name">Jennifer Santos</div>
+                <div class="t-role">Med Spa and Aesthetic Clinic Owner</div>
+              </div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">
+              "The AI Medical Notes saved me 2 hours every clinic day. That is
+              10 hours a week I used to spend charting at 10pm. I finally have
+              my evenings back."
+            </p>
+            <div class="t-author">
+              <div
+                class="t-av"
+                style="background: linear-gradient(135deg, #6c63ff, #4f46e5)"
+              >
+                AK
+              </div>
+              <div>
+                <div class="t-name">Dr. Aisha Khan, MD</div>
+                <div class="t-role">Primary Care Physician</div>
+              </div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">
+              "Tripled new patient bookings in 60 days without spending more on
+              ads. The recall automation brought back patients I had not seen in
+              2 years. Unreal ROI."
+            </p>
+            <div class="t-author">
+              <div
+                class="t-av"
+                style="background: linear-gradient(135deg, #ec4899, #f43f5e)"
+              >
+                JB
+              </div>
+              <div>
+                <div class="t-name">Dr. James Briggs, DC</div>
+                <div class="t-role">Chiropractic Clinic Owner</div>
+              </div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">
+              "We vetted 6 AI platforms. Patheown was the only one that led with
+              HIPAA compliance and had documentation to back it up. Waitlist
+              went from 8 weeks to 3."
+            </p>
+            <div class="t-author">
+              <div
+                class="t-av"
+                style="background: linear-gradient(135deg, #a78bfa, #6c63ff)"
+              >
+                PC
+              </div>
+              <div>
+                <div class="t-name">Patricia Cole, LMFT</div>
+                <div class="t-role">Behavioral Health Group Director</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how">
+      <div class="wrap">
+        <div class="sl">
+          <span class="sl-bar"></span><span class="sl-txt">How It Works</span>
+        </div>
+        <h2 class="section-h">
+          Live in your practice<br />in <em>under 2 weeks.</em>
+        </h2>
+        <p class="section-p">
+          We handle everything from compliance to build to integration to
+          training. Your team stays focused on patients the entire time.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-nw"><div class="step-n">01</div></div>
+            <div class="step-title">Free Strategy Call</div>
+            <div class="step-desc">
+              We audit your workflows, identify your biggest revenue leaks, and
+              show exactly where AI automation has the most impact.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-nw"><div class="step-n">02</div></div>
+            <div class="step-title">Compliance Review and BAA</div>
+            <div class="step-desc">
+              We sign your BAA and complete a full HIPAA review before a single
+              system is discussed, designed, or built.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-nw"><div class="step-n">03</div></div>
+            <div class="step-title">Custom Build and EHR Integration</div>
+            <div class="step-desc">
+              We build your AI systems and integrate with your existing EHR and
+              scheduling tools. No rip-and-replace required.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-nw"><div class="step-n">04</div></div>
+            <div class="step-title">Launch and Ongoing Optimization</div>
+            <div class="step-desc">
+              Go live with full staff training. We monitor and improve your
+              systems every single month to maximize your ROI.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="bottom">
+      <h2>Ready to be our next <em>success story?</em></h2>
+      <p>
+        Book a free 30-minute strategy call. We will show you exactly what is
+        possible for your specialty and how fast your practice can see results.
+      </p>
+      <div class="btns">
+        <a class="btn-white" href="/#demo"
+          >Book My Free Demo
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 8h10M9 4l4 4-4 4" /></svg
+        ></a>
+        <a class="btn-ghost-w" href="/pricing-tiers">View Pricing</a>
+      </div>
+      <div class="trust-row">
+        <div class="tr-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg
+          >HIPAA Compliant
+        </div>
+        <div class="tr-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" /></svg
+          >BAA Day One
+        </div>
+        <div class="tr-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" /></svg
+          >No Commitment
+        </div>
+        <div class="tr-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" /></svg
+          >Live in Under 2 Weeks
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="f-logo">
+        <span class="logo-plain">Path</span><span class="logo-em">eown</span>
+      </div>
+      <div class="f-links">
+        <a href="/industries">Specialties</a>
+        <a href="/pricing-tiers">Pricing</a>
+        <a href="/results">Results</a>
+      </div>
+      <p>© 2025 Patheown · HIPAA Compliant · All rights reserved.</p>
+    </footer>
+    <script>
+      function closeMobileMenu() {
+        document.getElementById("mobile-menu").classList.remove("open");
+        document.getElementById("hamburger").classList.remove("open");
+      }
+      document
+        .getElementById("hamburger")
+        .addEventListener("click", function () {
+          this.classList.toggle("open");
+          document.getElementById("mobile-menu").classList.toggle("open");
+        });
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest("nav") && !e.target.closest(".mobile-menu")) {
+          closeMobileMenu();
+        }
+      });
+    </script>
+  </body>
+</html>

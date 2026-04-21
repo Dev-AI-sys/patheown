@@ -43,6 +43,12 @@
         overflow-x: hidden;
         line-height: 1.6;
       }
+      body,
+      a,
+      button,
+      input {
+        -webkit-tap-highlight-color: transparent;
+      }
 
       /* NAV */
       nav {
@@ -1410,8 +1416,8 @@
         color: #fff;
       }
       footer p {
-        font-size: 14.5px;
-        color: rgba(255, 255, 255, 0.3);
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.32);
       }
 
       @keyframes up {
@@ -1516,15 +1522,15 @@
   </head>
   <body>
     <nav>
-      <a class="nav-logo" href="landing-page.html"
+      <a class="nav-logo" href="/"
         ><span class="logo-plain">Path</span
         ><span class="logo-em">eown</span></a
       >
       <div class="nav-links">
         <a href="#how">How It Works</a>
-        <a href="industries.html">Specialties</a>
-        <a href="pricing-tiers.html">Pricing</a>
-        <a href="results.html">Results</a>
+        <a href="/industries">Specialties</a>
+        <a href="/pricing-tiers">Pricing</a>
+        <a href="/results">Results</a>
       </div>
       <a class="nav-cta" href="#demo">Book a Free Demo →</a>
       <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -1534,16 +1540,16 @@
 
     <div class="mobile-menu" id="mobile-menu">
       <a href="#how" onclick="closeMobileMenu()">How It Works</a>
-      <a href="industries.html" onclick="closeMobileMenu()">Specialties</a>
-      <a href="pricing-tiers.html" onclick="closeMobileMenu()">Pricing</a>
-      <a href="results.html" onclick="closeMobileMenu()">Results</a>
+      <a href="/industries" onclick="closeMobileMenu()">Specialties</a>
+      <a href="/pricing-tiers" onclick="closeMobileMenu()">Pricing</a>
+      <a href="/results" onclick="closeMobileMenu()">Results</a>
       <a href="#demo" class="mob-cta" onclick="closeMobileMenu()"
         >Book a Free Demo →</a
       >
     </div>
 
     <!-- HERO -->
-    <section class="hero-section">
+    <section id="demo" class="hero-section">
       <div class="hero-inner">
         <div>
           <div class="hero-tag">
@@ -1620,7 +1626,6 @@
             </div>
           </div>
         </div>
-
         <iframe
           src="https://api.leadconnectorhq.com/widget/form/ZLa7GOYb1rmW3fYH4BNp"
           style="width: 100%; height: 100%; border: none; border-radius: 25px"
@@ -2919,7 +2924,7 @@
             >
               <path d="M3 8h10M9 4l4 4-4 4" /></svg
           ></a>
-          <a class="btn-sec" href="pricing-tiers.html">View Pricing →</a>
+          <a class="btn-sec" href="/pricing-tiers">View Pricing →</a>
         </div>
         <div class="cta-trust">
           <div class="ct-item">
@@ -2991,9 +2996,9 @@
         <span class="logo-plain">Path</span><span class="logo-em">eown</span>
       </div>
       <div class="f-links">
-        <a href="industries.html">Specialties</a>
-        <a href="pricing-tiers.html">Pricing</a>
-        <a href="results.html">Results</a>
+        <a href="/industries">Specialties</a>
+        <a href="/pricing-tiers">Pricing</a>
+        <a href="/results">Results</a>
       </div>
       <p>© 2025 Patheown · HIPAA Compliant · All rights reserved.</p>
     </footer>
